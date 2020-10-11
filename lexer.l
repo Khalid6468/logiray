@@ -21,7 +21,7 @@
 "while"																	{return WHILE;}
 "continue"																{return CONTINUE;}
 "break"																	{return BREAK;}
-"struct"|"union"													    {return STRUCT_UNION;}	//*
+//"struct"|"union"													    {return STRUCT_UNION;}	//*
 "return"																{return RETURN;}
 "sizeof"																{return SIZEOF;}
 "||"                                                                    {return OR;}
