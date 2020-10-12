@@ -10,7 +10,7 @@
 
 %%
 
-"void"|"char"|"short"|"int"|"long"|"float"|"signed"|"unsigned"										{return TYPE;}	
+"void"|"char"|"int"|"float"|"bool"								                                        {return TYPE;}	
 "switch"																{return SWITCH;}
 "case"																	{return CASE;}	
 "default"																{return DEFAULT;}
