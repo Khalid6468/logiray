@@ -1,1 +1,1 @@
-# logiray
+# LOGIRAY - LOGIc + arRAY
