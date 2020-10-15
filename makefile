@@ -8,4 +8,4 @@ y.tab.c : parser.y
 	yacc -d parser.y
 
 clean : 
-	rm -rf parser.dSYM lex.yy.c y.tab.c y.tab.h
+	rm -rf parser.dSYM parser lex.yy.c y.tab.c y.tab.h
