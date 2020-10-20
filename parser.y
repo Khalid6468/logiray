@@ -14,7 +14,7 @@
 }
 %start PROGRAM
 %token SWITCH CASE DEFAULT IF ELSE FOR DO WHILE CONTINUE BREAK STRUCT RETURN SIZEOF PROLOGIF
-%token AND OR ISEQUAL ISNOTEQUAL LE GE SLE SGE
+%token AND OR ISEQUAL ISNOTEQUAL LE GE SLE SGE IMPORT INTDIV
 %token <ch> SHIFT INC_OR_DEC CHAR BOOL_CONST
 %token <string> TYPE ASGN_OPERATOR IDENTIFIER STRING
 %token <num> INTEGER
@@ -26,11 +26,33 @@
 %nonassoc ELSE
 
 %%
-PROGRAM                 :   EXTERNAL_DECL
-                        |   PROGRAM EXTERNAL_DECL;
+PROGRAM                 :   IMPORT PROGRAM
+                        |   TRANSLATION_UNIT;
+
+TRANSLATION_UNIT        :   EXTERNAL_DECL
+                        |   TRANSLATION_UNIT EXTERNAL_DECL;
 
 EXTERNAL_DECL           :   FUNCTION
-                        |   DECLARATION ;
+                        |   DECLARATION
+                        |   FACT
+                        |   PROLOG_DEF;
+
+PROLOG_DEF              :   PROLOG_EXPR PROLOGIF PROLOG_EXPR_LIST '.';
+
+PROLOG_EXPR_LIST        :   PROLOG_EXPR
+                        |   COND_EXPR
+                        |   PROLOG_EXPR_LIST ',' PROLOG_EXPR
+                        |   PROLOG_EXPR_LIST ',' COND_EXPR;
+
+FACT                    :   PROLOG_EXPR '.';
+
+PROLOG_EXPR             :   DECLARATOR '(' ')'
+                        |   DECLARATOR '(' IDENTIFIER_LIST ')'
+                        |   DECLARATOR '(' PROLOG_LIST ')'
+                        |   '!' PROLOG_EXPR;
+
+PROLOG_LIST             :   '[' ']'
+                        |   '[' CHAR '|' IDENTIFIER ']';
 
 FUNCTION                :   DECL_SPECIFIER DECLARATOR DECLARATION_LIST COMPOUND_STMT
                         |   DECLARATOR DECLARATION_LIST COMPOUND_STMT
@@ -139,7 +161,8 @@ FOREXPRESSION           :   TYPE EXPRESSION
                         |   EXPRESSION;
 
 EXPRESSION              :   ASGN_EXPR
-                        |   EXPRESSION ',' ASGN_EXPR;
+                        |   EXPRESSION ',' ASGN_EXPR
+                        ;
 
 ASGN_EXPR               :   COND_EXPR
                         |   UNARY_EXPR ASGN_OPERATOR ASGN_EXPR;
@@ -184,6 +207,7 @@ ADDITION_EXPR           :   MULTIP_EXPR
 MULTIP_EXPR             :   CAST_EXPR
                         |   MULTIP_EXPR '*' CAST_EXPR
                         |   MULTIP_EXPR '/' CAST_EXPR
+                        |   MULTIP_EXPR INTDIV CAST_EXPR
                         |   MULTIP_EXPR '%' CAST_EXPR;
 
 CAST_EXPR               :   UNARY_EXPR

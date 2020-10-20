@@ -1,0 +1,2 @@
+loves(bob, alice).
+loves(a,b) plif loves(a,bob), a<b, loves(a,alice).
