@@ -1,0 +1,14 @@
+import lib/tech
+
+#*  
+    Hello Comment 
+    Test 123
+*#
+
+## Are you kidding me!
+
+int main(){
+    int a = 1;
+    string p = "Commet, cava!";
+    return 0;
+}

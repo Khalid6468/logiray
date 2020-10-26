@@ -1,0 +1,19 @@
+import tech
+check(M,W).
+check(Alice,Bob).
+check(X,Y) plif check(X,a), check(Y,b).
+
+int fact(int n){
+    if(check(1,5) && n is 1)
+        return 1;
+    else
+        return n * fact(n-1);
+}
+
+int main(){
+    int ans;
+    if(true)
+        ans = fact(5);
+    else
+        ans = 0;
+}

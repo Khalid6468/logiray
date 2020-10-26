@@ -4,6 +4,7 @@
     void yyerror();
     int yylex();
     int status = 1;
+
 %}
 
 %union {
@@ -12,6 +13,7 @@
     char ch;
     char *string;
 }
+
 %start PROGRAM
 %token SWITCH CASE DEFAULT IF ELSE FOR DO WHILE CONTINUE BREAK STRUCT RETURN SIZEOF PROLOGIF
 %token AND OR ISEQUAL ISNOTEQUAL LE GE SLE SGE IMPORT INTDIV
@@ -247,17 +249,16 @@ CONSTANT                :   INTEGER
 
 %%
 
-int main() {
+int main(int argc, char** argv) {
 
     yyparse();
     if (status==1)
         printf("\n******Parsing Successful!******\n");
     
-    return 0;
 }
 
 void yyerror () {
     extern int yylineno;
-	printf("Parsing failed at Line %d\nSyntax Error!\n",yylineno);
+	fprintf(stderr, "Parsing failed at Line %d\nSyntax Error!\n",yylineno);
     status = 0;
 } 
