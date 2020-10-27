@@ -27,5 +27,5 @@ jobs:
 
       - name: Cleans-up after Make
         run: |
-          make clean,
+          make clean ,
           echo Successful!.
