@@ -22,8 +22,5 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Runs Make
-        run: make
-
-      - name: Cleans-up after Make
-        run: make clean
+      - name: make-with-testfiles 
+        run: bash test.sh
