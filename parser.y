@@ -31,13 +31,13 @@
 
 %%
 PROGRAM                 :   IMPORT FILENAME
-                        |   TRANSLATION_UNIT {printf("Did Nothing!");}
+                        |   TRANSLATION_UNIT
                         |   PROGRAM TRANSLATION_UNIT;
 
 TRANSLATION_UNIT        :   EXTERNAL_DECL
                         |   TRANSLATION_UNIT EXTERNAL_DECL;
 
-EXTERNAL_DECL           :   FUNCTION {printf("Gotcha!");}
+EXTERNAL_DECL           :   FUNCTION
                         |   DECLARATION
                         |   FACT
                         |   PROLOG_DEF;

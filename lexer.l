@@ -24,48 +24,48 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 
 %%
 
-"void"|"char"|"int"|"float"|"bool"|"string"					   	                                {yylval.string = yytext; return TYPE;}	
-"switch"														                                {return SWITCH;}
-"case"															                                {return CASE;}	
-"default"														                                {return DEFAULT;}
-"if"															                                {return IF;}
-"else"															                                {return ELSE;}
-"for"															                                {return FOR;}
-"do"															                                {return DO;}
-"while"															                                {return WHILE;}
-"continue"														                                {return CONTINUE;}
-"break"															                                {return BREAK;}
-"struct"													                                    {return STRUCT;}
-"return"														                                {return RETURN;}
-"sizeof"														                                {return SIZEOF;}
-"plif"|":-"															                            {return PROLOGIF;}
-"||"                                                                                            {return OR;}
-"&&"															                                {return AND;}
-"=="|"is"														                                {return ISEQUAL;}
-"!="|"isnot"													                                {return ISNOTEQUAL;}
-"<="															                                {return LE;}
-">="															                                {return GE;}
-"<"																                                {return SLE;}
-">"																                                {return SGE;}
-">>"|"<<"														                                {yylval.ch = yytext[0]=='<' ? 'l' : 'r'; return SHIFT;}
-"++"|"--"														                                {yylval.ch = yytext[0]=='+' ? 'a' : 's'; return INC_OR_DEC;}
-"//"															                                {return INTDIV;}
-";"|"*"|"+"|"-"|"/"|"?"|":"|"&"|"|"|"^"|"!"|"~"|"%"|","|"{"|"}"|"("|")"|"["|"]"|"."				{return yytext[0];}
-"*="|"/="|"+="|"%="|">>="|"-="|"<<="|"&="|"^="|"|="|"="											{yylval.string = yytext; return ASGN_OPERATOR;}
-"true"|"false"																					{yylval.ch = yytext[0]; return BOOL_CONST;}
-[0-9]+																							{yylval.num = atoi(yytext); return INTEGER;}
-[0-9]+"."[0-9]+																					{yylval.decimal = atof(yytext); return FLOAT;}
-\'([^'\\]|['"?\\abfnrtv]|{UCN})+\'																{yylval.ch = yytext[1]; return CHAR;}
-L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; return STRING;}																					
-([_a-zA-Z]|{UCN})([_a-zA-Z0-9]|{UCN})*			 												{yylval.string = yytext; return IDENTIFIER;}
-[a-zA-z_.][a-zA-z_0-9./]*                                                                       {yylval.string = yytext; return FILENAME;}
+"void"|"char"|"int"|"float"|"bool"|"string"					   	                                {yylval.string = yytext; printf("%s\t\t - \t TYPE\n", yytext); return TYPE;}	
+"switch"														                                {printf("%s\t\t - \t SWITCH\n", yytext); return SWITCH;}
+"case"															                                {printf("%s\t\t - \t CASE\n", yytext); return CASE;}	
+"default"														                                {printf("%s\t\t - \t DEFAULT\n", yytext); return DEFAULT;}
+"if"															                                {printf("%s\t\t - \t IF\n", yytext); return IF;}
+"else"															                                {printf("%s\t\t - \t ELSE\n", yytext); return ELSE;}
+"for"															                                {printf("%s\t\t - \t FOR\n", yytext); return FOR;}
+"do"															                                {printf("%s\t\t - \t DO\n", yytext); return DO;}
+"while"															                                {printf("%s\t\t - \t WHILE\n", yytext); return WHILE;}
+"continue"														                                {printf("%s\t\t - \t CONTINUE\n", yytext); return CONTINUE;}
+"break"															                                {printf("%s\t\t - \t BREAK\n", yytext); return BREAK;}
+"struct"													                                    {printf("%s\t\t - \t STRUCT\n", yytext); return STRUCT;}
+"return"														                                {printf("%s\t\t - \t RETURN\n", yytext); return RETURN;}
+"sizeof"														                                {printf("%s\t\t - \t SIZEOF\n", yytext); return SIZEOF;}
+"plif"|":-"															                            {printf("%s\t\t - \t PROLOGIF\n", yytext); return PROLOGIF;}
+"||"                                                                                            {printf("%s\t\t - \t OR\n", yytext); return OR;}
+"&&"															                                {printf("%s\t\t - \t AND\n", yytext); return AND;}
+"=="|"is"														                                {printf("%s\t\t - \t ISEQUAL\n", yytext); return ISEQUAL;}
+"!="|"isnot"													                                {printf("%s\t\t - \t ISNOTEQUAL\n", yytext); return ISNOTEQUAL;}
+"<="															                                {printf("%s\t\t - \t LE\n", yytext); return LE;}
+">="															                                {printf("%s\t\t - \t GE\n", yytext); return GE;}
+"<"																                                {printf("%s\t\t - \t SLE\n", yytext); return SLE;}
+">"																                                {printf("%s\t\t - \t SGE\n", yytext); return SGE;}
+">>"|"<<"														                                {printf("%s\t\t - \t SHIFT\n", yytext); yylval.ch = yytext[0]=='<' ? 'l' : 'r'; return SHIFT;}
+"++"|"--"														                                {printf("%s\t\t - \t INC_OR_DEC\n", yytext); yylval.ch = yytext[0]=='+' ? 'a' : 's'; return INC_OR_DEC;}
+"//"															                                {printf("%s\t\t - \t INTDIV\n", yytext); return INTDIV;}
+";"|"*"|"+"|"-"|"/"|"?"|":"|"&"|"|"|"^"|"!"|"~"|"%"|","|"{"|"}"|"("|")"|"["|"]"|"."				{printf("%s\t\t - \t ITSELF\n", yytext); return yytext[0];}
+"*="|"/="|"+="|"%="|">>="|"-="|"<<="|"&="|"^="|"|="|"="											{printf("%s\t\t - \t ASGN_OPERATOR\n", yytext); yylval.string = yytext; return ASGN_OPERATOR;}
+"true"|"false"																					{yylval.ch = yytext[0]; printf("%s\t\t - \t BOOL_CONST\n", yytext); return BOOL_CONST;}
+[0-9]+																							{yylval.num = atoi(yytext); printf("%s\t\t - \t INTEGER\n", yytext); return INTEGER;}
+[0-9]+"."[0-9]+																					{yylval.decimal = atof(yytext); printf("%s\t\t - \t FLOAT", yytext); return FLOAT;}
+\'([^'\\]|['"?\\abfnrtv]|{UCN})+\'																{yylval.ch = yytext[1]; printf("%s\t\t - \t CHAR\n", yytext); return CHAR;}
+L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; printf("%s\t\t - \t STRING\n", yytext); return STRING;}																					
+([_a-zA-Z]|{UCN})([_a-zA-Z0-9]|{UCN})*			 												{yylval.string = yytext; printf("%s\t\t - \t IDENTIFIER\n", yytext); return IDENTIFIER;}
+[a-zA-z_.][a-zA-z_0-9./]*                                                                       {yylval.string = yytext; printf("%s\t\t - \t FILENAME\n", yytext); return FILENAME;}
 
 "#"(\\.|[^\n])*[\n]																				{;}
 [#][*]([^*]|[*]*[^*/])*[*]+[#]                                          						{;}
 [ \t\n]                                          						                        {;}
 
 
-^import[ \t]+ 	                                                                                { BEGIN IFILE; }
+^import[ \t]+ 	                                                                                { BEGIN IFILE; printf("%s\t\t - \t IMPORT\n", yytext); }
 <IFILE>[^\n]+ 	                                                                                {
                                                                                                     { 
                                                                                                         int c;
