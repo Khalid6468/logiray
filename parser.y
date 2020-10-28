@@ -30,12 +30,8 @@
 %nonassoc ELSE
 
 %%
-PROGRAM                 :   IMPORT FILENAME
-                        |   TRANSLATION_UNIT
-                        |   PROGRAM TRANSLATION_UNIT;
-
-TRANSLATION_UNIT        :   EXTERNAL_DECL
-                        |   TRANSLATION_UNIT EXTERNAL_DECL;
+PROGRAM                 :   EXTERNAL_DECL
+                        |   PROGRAM EXTERNAL_DECL;
 
 EXTERNAL_DECL           :   FUNCTION
                         |   DECLARATION

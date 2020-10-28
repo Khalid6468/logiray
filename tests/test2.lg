@@ -1,4 +1,4 @@
-import ../importFile
+import test1.lg
 
 check(M,W).
 check(Alice,Bob).
