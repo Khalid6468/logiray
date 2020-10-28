@@ -1,4 +1,5 @@
-import tech
+import ../importFile
+
 check(M,W).
 check(Alice,Bob).
 check(X,Y) plif check(X,a), check(Y,b).

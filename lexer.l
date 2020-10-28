@@ -19,6 +19,7 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
     } *curbs = NULL;
 	int newfile(char* fn);
     int popfile(void);
+    extern char* fname;
 %}
 
 %%
@@ -57,14 +58,12 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 \'([^'\\]|['"?\\abfnrtv]|{UCN})+\'																{yylval.ch = yytext[1]; return CHAR;}
 L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; return STRING;}																					
 ([_a-zA-Z]|{UCN})([_a-zA-Z0-9]|{UCN})*			 												{yylval.string = yytext; return IDENTIFIER;}
+[a-zA-z_.][a-zA-z_0-9./]*                                                                       {yylval.string = yytext; return FILENAME;}
 
+"#"(\\.|[^\n])*[\n]																				{;}
+[#][*]([^*]|[*]*[^*/])*[*]+[#]                                          						{;}
+[ \t\n]                                          						                        {;}
 
-"#*"                                                                                            {BEGIN(COMMENT);}
-<COMMENT>"*#"                                                                                   {BEGIN(INITIAL);}
-<COMMENT>([^*]|\n)+|.
-<COMMENT><<EOF>>                                                                                {printf("%s:%d: Unterminated comment\n", curfilename, yylineno); return 0;}
-"#".*\n
-[ \t\n]
 
 ^import[ \t]+ 	                                                                                { BEGIN IFILE; }
 <IFILE>[^\n]+ 	                                                                                {
@@ -82,12 +81,33 @@ L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; re
 .                                                                                               { fprintf(stderr, "%s:%d: Mystery character '%s'\n", curfilename, yylineno, yytext); }
 %%
 
+char *strrev(char *str)
+{
+      char *p1, *p2;
+
+      if (! str || ! *str)
+            return str;
+      for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
+      {
+            *p1 ^= *p2;
+            *p2 ^= *p1;
+            *p1 ^= *p2;
+      }
+      return str;
+}
+
 int newfile(char* fn){
-    FILE* f = fopen(fn, "r");
+
+    strrev(fname);
+    fname = strstr(fname, "/");
+    strrev(fname);
+    strcat(fname, fn);
+
+    FILE* f = fopen(fname, "r");
     struct bufstack* bs = (struct bufstack*)malloc(sizeof(struct bufstack));
 
     if(!f){
-        perror(fn);
+        perror(fname);
         return 0;
     }
 
@@ -106,7 +126,7 @@ int newfile(char* fn){
     yy_switch_to_buffer(bs->bs);
     curbs = bs;
     yylineno = 1;
-    curfilename = fn;
+    curfilename = fname;
     return 1;
 }
 

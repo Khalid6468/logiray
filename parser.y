@@ -1,10 +1,12 @@
 %{
     #include<stdio.h>
     #include<stdlib.h>
+    #include<string.h>
     void yyerror();
     int yylex();
     int status = 1;
-
+    FILE* yyin;
+    char* fname;
 %}
 
 %union {
@@ -18,7 +20,7 @@
 %token SWITCH CASE DEFAULT IF ELSE FOR DO WHILE CONTINUE BREAK STRUCT RETURN SIZEOF PROLOGIF
 %token AND OR ISEQUAL ISNOTEQUAL LE GE SLE SGE IMPORT INTDIV
 %token <ch> SHIFT INC_OR_DEC CHAR BOOL_CONST
-%token <string> TYPE ASGN_OPERATOR IDENTIFIER STRING
+%token <string> TYPE ASGN_OPERATOR IDENTIFIER STRING FILENAME
 %token <num> INTEGER
 %token <decimal> FLOAT
 
@@ -28,13 +30,14 @@
 %nonassoc ELSE
 
 %%
-PROGRAM                 :   IMPORT PROGRAM
-                        |   TRANSLATION_UNIT;
+PROGRAM                 :   IMPORT FILENAME
+                        |   TRANSLATION_UNIT {printf("Did Nothing!");}
+                        |   PROGRAM TRANSLATION_UNIT;
 
 TRANSLATION_UNIT        :   EXTERNAL_DECL
                         |   TRANSLATION_UNIT EXTERNAL_DECL;
 
-EXTERNAL_DECL           :   FUNCTION
+EXTERNAL_DECL           :   FUNCTION {printf("Gotcha!");}
                         |   DECLARATION
                         |   FACT
                         |   PROLOG_DEF;
@@ -251,11 +254,31 @@ CONSTANT                :   INTEGER
 
 int main(int argc, char** argv) {
 
-    yyparse();
+    for (int i = 1; i < argc; ++i) {
+        fname = argv[i];
+        yyin = fopen(fname, "r");
+
+        yyparse();  
+
+        fclose(yyin);
+    }
+
     if (status==1)
-        printf("\n******Parsing Successful!******\n");
+        printf("\n******Parsing Successful!******");
     
 }
+
+// void handleImport(char * fname) {
+//     strrev(fname);
+//     fname = strstr(fname, "/");
+//     strrev(fname);
+//     strcat(fname, fn);
+//     FILE* f = fopen(fname, "r");
+//     yyin = fopen($1, "r");
+//     yyparse();  
+//     fclose(yyin);
+
+// }
 
 void yyerror () {
     extern int yylineno;
