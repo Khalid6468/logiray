@@ -1,11 +1,11 @@
-parser : lex.yy.c parser.tab.c
-	gcc -g lex.yy.c parser.tab.c -o parser
+parser : lexer.cpp parser.cpp
+	g++ -g lexer.cpp parser.cpp -o parser
 
-lex.yy.c : parser.tab.c lexer.l
-	flex lexer.l
+lexer.cpp : parser.cpp lexer.l
+	flex -o lexer.cpp lexer.l
 
-parser.tab.c : parser.y
-	bison -d parser.y
+parser.cpp : parser.y
+	bison -d -o parser.cpp parser.y
 
 clean : 
-	rm -rf parser.dSYM parser lex.yy.c parser.tab.c parser.tab.h
+	rm parser lexer.cpp parser.cpp parser.hpp
