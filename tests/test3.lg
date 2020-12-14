@@ -1,4 +1,6 @@
+import ../importFile
 import test1.lg
+import test0.lg
 
 #*  
     Hello Comment 
