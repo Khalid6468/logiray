@@ -6,7 +6,8 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 %{
 	#include <stdio.h>
 	#include <stdlib.h>
-	#include "parser.tab.h"
+    #include "astnodes.h"
+	#include "parser.hpp"
 	char* curfilename;
 	struct bufstack{
         struct bufstack *prev;

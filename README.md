@@ -7,7 +7,7 @@ To build:
 To run the parse:
     
     parser <filename>
-    #if used make to build
+    #if used make to build. No need of input redirection. It works as a command
     ./parser <filenames>
 
 To make parser and also intermediate files:
