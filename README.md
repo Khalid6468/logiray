@@ -1,5 +1,7 @@
 # LOGIRAY - LOGIc + arRAY
 
+## This is a Work in Progress. Branch is for developing the AST generation phase.
+
 To build:
     
     source build.sh
