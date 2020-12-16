@@ -267,18 +267,6 @@ int main(int argc, char** argv) {
     
 }
 
-// void handleImport(char * fname) {
-//     strrev(fname);
-//     fname = strstr(fname, "/");
-//     strrev(fname);
-//     strcat(fname, fn);
-//     FILE* f = fopen(fname, "r");
-//     yyin = fopen($1, "r");
-//     yyparse();  
-//     fclose(yyin);
-
-// }
-
 void yyerror () {
     extern int yylineno;
 	fprintf(stderr, "Parsing failed at Line %d\nSyntax Error!\n",yylineno);
