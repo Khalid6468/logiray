@@ -50,7 +50,7 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 ">>"|"<<"														                                {printf("%s\t\t\t - \t SHIFT\n", yytext); yylval.ch = yytext[0]=='<' ? 'l' : 'r'; return SHIFT;}
 "++"|"--"														                                {printf("%s\t\t\t - \t INC_OR_DEC\n", yytext); yylval.ch = yytext[0]=='+' ? 'a' : 's'; return INC_OR_DEC;}
 "//"															                                {printf("%s\t\t\t - \t INTDIV\n", yytext); return INTDIV;}
-";"|"*"|"+"|"-"|"/"|"?"|":"|"&"|"|"|"^"|"!"|"~"|"%"|","|"{"|"}"|"("|")"|"["|"]"|"."				{printf("%s\t\t\t - \t ITSELF\n", yytext); return yytext[0];}
+";"|"*"|"+"|"-"|"/"|"?"|":"|"&"|"|"|"^"|"!"|"~"|"%"|","|"{"|"}"|"("|")"|"["|"]"|"."|"@"			{printf("%s\t\t\t - \t ITSELF\n", yytext); return yytext[0];}
 "*="|"/="|"+="|"%="|">>="|"-="|"<<="|"&="|"^="|"|="|"="											{printf("%s\t\t\t - \t ASGN_OPERATOR\n", yytext); yylval.string = yytext; return ASGN_OPERATOR;}
 "true"|"false"																					{yylval.ch = yytext[0]; printf("%s\t\t\t - \t BOOL_CONST\n", yytext); return BOOL_CONST;}
 [0-9]+																							{yylval.num = atoi(yytext); printf("%s\t\t\t - \t INTEGER\n", yytext); return INTEGER;}

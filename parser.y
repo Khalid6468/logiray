@@ -209,6 +209,7 @@ ADDITION_EXPR           :   MULTIP_EXPR
 
 MULTIP_EXPR             :   CAST_EXPR
                         |   MULTIP_EXPR '*' CAST_EXPR
+                        |   MULTIP_EXPR '@' CAST_EXPR
                         |   MULTIP_EXPR '/' CAST_EXPR
                         |   MULTIP_EXPR INTDIV CAST_EXPR
                         |   MULTIP_EXPR '%' CAST_EXPR;
