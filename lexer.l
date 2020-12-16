@@ -35,7 +35,7 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 "continue"														                                {printf("%s\t\t\t - \t CONTINUE\n", yytext); return CONTINUE;}
 "break"															                                {printf("%s\t\t\t - \t BREAK\n", yytext); return BREAK;}
 "struct"													                                    {printf("%s\t\t\t - \t STRUCT\n", yytext); return STRUCT;}
-"import"                                                                                        {printf("Gotcha!"); BEGIN(INCLFILE);}
+"import"                                                                                        {BEGIN(INCLFILE);}
 "return"														                                {printf("%s\t\t\t - \t RETURN\n", yytext); return RETURN;}
 "sizeof"														                                {printf("%s\t\t\t - \t SIZEOF\n", yytext); return SIZEOF;}
 "plif"|":-"															                            {printf("%s\t\t\t - \t PROLOGIF\n", yytext); return PROLOGIF;}
@@ -66,9 +66,7 @@ L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; pr
 <INCLFILE>[ \t]*                                
 <INCLFILE>[^ \t\n]+                         {newfile(yytext);}
 <<EOF>>                         {
-                                    printf("%d   - stackptr\n", include_stack_ptr);
                                     if(--include_stack_ptr) { 
-                                        printf("%d   - stackptr\n", include_stack_ptr);
                                         yyterminate();
                                     }
                                     else{
@@ -103,13 +101,12 @@ void newfile(char* fn){
     filename = strstr(filename, "/");
     strrev(filename);
     strcat(filename, fn);
-    printf("filename - %s\n", filename);
+    printf("Parsed File - %s\n", filename);
     include_stack[include_stack_ptr++] = YY_CURRENT_BUFFER;
     printf("++++++++++++++++++++Did That!++++++++++++++++++++\n");
     yyin = fopen(filename, "r" );
     if (!yyin) printf("ERROr!\n");
     yypush_buffer_state(yy_create_buffer(yyin, YY_BUF_SIZE ));
-    printf("Going back!");
     BEGIN(INITIAL);
 }
 
