@@ -262,7 +262,7 @@ int main(int argc, char** argv) {
     }
 
     if (status==1)
-        printf("\n******Parsing Successful!******");
+        printf("\n******Parsing Successful!******\n");
     
 }
 
