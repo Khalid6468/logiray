@@ -4,7 +4,7 @@ We have 2 branches that contain our code:
 - main
 - AST
 
-**main** branch contains the updates till now that "work". We progresses after the parsing too into semantic analysis and building AST. But, we could not complete it.
+**main** branch contains the updates till now that "work". We progressed after the parsing too...into semantic analysis and building AST. But, we could not complete it.
 
 **AST** branch contains the work we have did after parsing i.e AST generation and semantic analysis. We added them in another branch from the beginning too because we were planning to merge it into *main* branch once it works well. Do check our progress in the **AST** directory too. We made our best effort to complete it in time but could not.
 
