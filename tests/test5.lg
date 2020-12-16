@@ -1,0 +1,12 @@
+#Hello!
+int main() {
+    int a = rand();
+    int b = rand();
+    int c;
+    c = a * b;
+
+    if(a<b) 
+        return 0;
+    else
+        return c;
+}
