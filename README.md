@@ -30,6 +30,6 @@ To run the parser on some file:
     #If you used build.sh to build use:
     parser <filenames>
 
-To check our progress on AST and Semantic Analysis, switch to **AST** branch. While building it in AST branch, we got errors with yyerror function. We identified the issue to be with migrating from C to C++ but could not fix it. The AST is partially but correctly done.
+To check our progress on AST and Semantic Analysis, switch to [AST branch](https://github.com/lucifer6468/logiray/tree/AST). While building compiler in AST branch, you will get errors with yyerror function. We identified the issue to be with migrating from C to C++ but could not fix it. The AST is partially but correctly done.
 
 Testcases are in **tests** directory. "import" feature is something that we believe is the **key** feature of our compiler.
