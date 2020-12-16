@@ -1,0 +1,6 @@
+int main(){
+    int m=0;
+    for(;m<10){
+        m++;
+    }
+}
