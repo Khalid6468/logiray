@@ -1,3 +1,0 @@
-int def(int l){
-    return l;
-}
