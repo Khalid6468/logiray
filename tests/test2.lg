@@ -1,14 +1,13 @@
 import test1.lg
 
-check(M,W).
-check(Alice,Bob).
-check(X,Y) plif check(X,a), check(Y,b).
+greaterthanone(2).
+greaterthanone(X) plif greaterthanone(X-1).
 
 int fact(int n){
-    if(check(1,5) && n is 1)
-        return 1;
-    else
+    if(greaterthanone(n))
         return n * fact(n-1);
+    else
+        return 1;
 }
 
 int main(){
