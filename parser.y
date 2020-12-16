@@ -321,15 +321,4 @@ void yyerror () {
     status = 0;
 } 
 
-// void handleImport(char * fname) {
-//     strrev(fname);
-//     fname = strstr(fname, "/");
-//     strrev(fname);
-//     strcat(fname, fn);
-//     FILE* f = fopen(fname, "r");
-//     yyin = fopen($1, "r");
-//     yyparse(); 
-//     fclose(yyin);
-
-// }
 
