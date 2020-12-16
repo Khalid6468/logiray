@@ -6,7 +6,7 @@ We have 2 branches that contain our code:
 
 **main** branch contains the updates till now that "work". We progresses after the parsing too into semantic analysis and building AST. But, we could not complete it.
 
-**AST** branch contains the work we have did after parsing i.e AST generation and semantic analysis. We added them in another branch from the beginning too because we were planning to merge it into *main* branch once it works well. Do check our progress in the **AST** directory too.
+**AST** branch contains the work we have did after parsing i.e AST generation and semantic analysis. We added them in another branch from the beginning too because we were planning to merge it into *main* branch once it works well. Do check our progress in the **AST** directory too. We made our best effort to complete it in time but could not.
 
 How to build: 
     
@@ -28,8 +28,6 @@ To run the parser on some file:
     #If you used build.sh to build use:
     parser <filenames>
 
-To make parser and also intermediate files:
-    
-    make
+To check our progress on AST and Semantic Analysis, switch to **AST** branch. While building it in AST branch, we got errors with yyerror function. We identified the issue to be with migrating from C to C++ but could not fix it. The AST is partially but correctly done.
 
-Testcases are in **tests** directory. importFile.lg is used to test import feature. importFeature is still WorkInProgress.
+Testcases are in **tests** directory. "import" feature is something that we believe is the **key** feature of our compiler.
