@@ -1,5 +1,6 @@
 int foo() {
     int a = 10;
+    return a;
 }
 #Hello!
 int main() {
@@ -9,5 +10,5 @@ int main() {
     c = a * b;
     a = c @ b;
     int k = foo();
-    return 0;
+    return k;
 }
