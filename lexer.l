@@ -8,13 +8,6 @@ UCN     (\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8})
 	#include <stdlib.h>
 	#include "parser.tab.h"
 	char* curfilename;
-	struct bufstack{
-        struct bufstack *prev;
-        YY_BUFFER_STATE bs;
-        int lineno;
-        char* filename;
-        FILE* f;
-    } *curbs = NULL;
 	void newfile(char* fn);
     extern char* fname;
     YY_BUFFER_STATE include_stack[1000];
@@ -63,7 +56,7 @@ L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; pr
 [#][*]([^*]|[*]*[^*/])*[*]+[#]                                          						{;}
 [ \t\n]                                          						                        {;}
 
-<INCLFILE>[ \t]*                                
+<INCLFILE>[ \t]*                            {;}    
 <INCLFILE>[^ \t\n]+                         {newfile(yytext);}
 <<EOF>>                         {
                                     if(--include_stack_ptr) { 
