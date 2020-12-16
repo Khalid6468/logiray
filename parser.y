@@ -49,6 +49,8 @@ FACT                    :   PROLOG_EXPR '.';
 
 PROLOG_EXPR             :   DECLARATOR '(' ')'
                         |   DECLARATOR '(' IDENTIFIER_LIST ')'
+                        |   DECLARATOR '(' CONSTANT ')'
+                        |   DECLARATOR '(' EXPRESSION ')'
                         |   DECLARATOR '(' PROLOG_LIST ')'
                         |   '!' PROLOG_EXPR;
 
