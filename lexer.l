@@ -63,7 +63,7 @@ L?\"([^"\\]|\\['"?\\abfnrtv]|{UCN})*\"															{yylval.string = yytext; pr
 [#][*]([^*]|[*]*[^*/])*[*]+[#]                                          						{;}
 [ \t\n]                                          						                        {;}
 
-<INCLFILE>[ \t]*                                
+<INCLFILE>[ \t]*                            {;}    
 <INCLFILE>[^ \t\n]+                         {newfile(yytext);}
 <<EOF>>                         {
                                     if(--include_stack_ptr) { 
